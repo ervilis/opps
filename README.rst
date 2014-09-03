@@ -1,6 +1,6 @@
-======================================
-Opps - Open Platform Publishing System
-======================================
+============================================
+Opps 0.3.x - Open Platform Publishing System
+============================================
 
 An *Open Source Content Management* for the **magazine** websites and **high-traffic**, using the Django Framework.
 
