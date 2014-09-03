@@ -1,6 +1,7 @@
 Django>=1.7
 Pillow
 django-polymorphic
+django-treebeard
 django-haystack
 django-appconf
 redis
