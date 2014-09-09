@@ -28,7 +28,7 @@ class Owned(models.Model):
         abstract = True
 
 
-class Publishable(Date):
+class Publishable(Date, Owned):
     site = models.ForeignKey(Site, default=1)
     site_uid = models.PositiveIntegerField(
         _(u"Site id"),
@@ -69,7 +69,7 @@ class Channeling(models.Model):
     channel = models.ManyToManyField(
         'channels.Channel',
         verbose_name=_(u"Channel"),
-        related_name="%(app_label)s_%(class)s_channel",
+        related_name="channeling_%(app_label)s_%(class)s_sets+",
     )
     channel_slug = models.CharField(
         _(u"Channel slug"),
