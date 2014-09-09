@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import uuid
 import hmac
+import json
 
 from hashlib import sha1
 
@@ -101,15 +102,7 @@ class Container(PolymorphicModel, ShowFieldContent, Channeling, Publishable):
                     issubclass(model, cls) and
                     model is not cls)]
 
-    def inbox(self, containerbox=None):
-        obj = ContainerBoxContainers.objects
-        if containerbox:
-            return obj.get(container=self.id,
-                           containerbox__slug=containerbox)
-        return obj.filter(container=self.id)
-
     def custom_fields(self):
-        import json
         if not self.json:
             return
         return json.loads(self.json)
