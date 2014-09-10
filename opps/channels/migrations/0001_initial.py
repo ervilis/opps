@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('depth', models.PositiveIntegerField()),
                 ('numchild', models.PositiveIntegerField(default=0)),
                 ('name', models.CharField(max_length=60, verbose_name='Name')),
-                ('long_slug', models.SlugField(max_length=250, verbose_name='Path name')),
+                ('long_slug', models.SlugField(max_length=250, verbose_name='Long Slug')),
                 ('layout', models.CharField(default=b'default', max_length=250, verbose_name='Layout', db_index=True)),
                 ('description', models.CharField(max_length=255, null=True, verbose_name='Description', blank=True)),
                 ('hat', models.CharField(max_length=255, null=True, verbose_name='Hat', blank=True)),
