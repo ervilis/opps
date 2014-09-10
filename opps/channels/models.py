@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import unicode_literals
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.core.exceptions import ValidationError
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from treebeard.mp_tree import MP_Node
 
-from opps.core.models import Publishable
-from opps.core.models import Slugged
 from opps.containers.models import Container
+from opps.core.models import Publishable, Slugged
 
 
+@python_2_unicode_compatible
 class Channel(Publishable, Slugged, MP_Node):
 
     name = models.CharField(_("Name"), max_length=60)
@@ -45,7 +45,7 @@ class Channel(Publishable, Slugged, MP_Node):
         verbose_name = _('Channel')
         verbose_name_plural = _('Channels')
 
-    def __unicode__(self):
+    def __str__(self):
         """ Uniform resource identifier
         http://en.wikipedia.org/wiki/Uniform_resource_identifier
         """

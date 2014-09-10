@@ -16,6 +16,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.template.defaultfilters import slugify
 from django.contrib.sites.models import Site
+from django.utils.encoding import python_2_unicode_compatible
 
 from polymorphic import PolymorphicModel
 from polymorphic.showfields import ShowFieldContent
@@ -24,6 +25,7 @@ from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling
 
 
+@python_2_unicode_compatible
 class Container(PolymorphicModel, ShowFieldContent, Channeling, Publishable):
     uid = models.CharField(
         _('UID'),
@@ -50,7 +52,7 @@ class Container(PolymorphicModel, ShowFieldContent, Channeling, Publishable):
         db_index=True
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return "{}".format(self.get_absolute_url())
 
     def __repr__(self):
