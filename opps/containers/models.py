@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import uuid
 import hmac
 import json
-
-from __future__ import unicode_literals
 
 from hashlib import sha1
 
