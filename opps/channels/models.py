@@ -17,7 +17,7 @@ from opps.containers.models import Container
 class Channel(Publishable, Slugged, MP_Node):
 
     name = models.CharField(_("Name"), max_length=60)
-    long_slug = models.SlugField(_("Path name"), max_length=250,
+    long_slug = models.SlugField(_("Long Slug"), max_length=250,
                                  db_index=True)
     layout = models.CharField(_('Layout'), max_length=250, db_index=True,
                               default="default")
