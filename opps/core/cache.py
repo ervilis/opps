@@ -1,5 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.conf import settings
 from django.contrib.sites.models import get_current_site
 from django.views.decorators.cache import cache_page as django_cache_page
@@ -8,7 +9,7 @@ from hashlib import md5
 
 
 def _cache_key(_type, model, site, channel_long_slug):
-    return md5((u'{}:{}:{}:{}:{}'.format(
+    return md5(('{}:{}:{}:{}:{}'.format(
         _type,
         settings.OPPS_CACHE_PREFIX,
         model._meta.db_table,
@@ -24,7 +25,7 @@ def cache_page(*dec_args, **dec_kwargs):
     def decorator(func):
         def wrapped(*func_args, **func_kwargs):
             request = func_args[0]
-            cache_prefix = u'{}-{}-{}'.format(
+            cache_prefix = '{}-{}-{}'.format(
                 key_prefix,
                 get_current_site(request).domain,
                 getattr(request, 'is_mobile', False)

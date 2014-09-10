@@ -3,6 +3,8 @@ import uuid
 import hmac
 import json
 
+from __future__ import unicode_literals
+
 from hashlib import sha1
 
 from django.db import models
@@ -24,32 +26,32 @@ from opps.core.models import Publishable, Slugged, Channeling
 
 class Container(PolymorphicModel, ShowFieldContent, Channeling, Publishable):
     uid = models.CharField(
-        _(u'UID'),
+        _('UID'),
         max_length=60,
         null=True, blank=True,
         db_index=True
     )
     child_class = models.CharField(
-        _(u'Child class'),
+        _('Child class'),
         max_length=30,
         null=True, blank=True,
         db_index=True
     )
     child_module = models.CharField(
-        _(u'Child module'),
+        _('Child module'),
         max_length=120,
         null=True, blank=True,
         db_index=True
     )
     child_app_label = models.CharField(
-        _(u'Child app label'),
+        _('Child app label'),
         max_length=30,
         null=True, blank=True,
         db_index=True
     )
 
     def __unicode__(self):
-        return u"{}".format(self.get_absolute_url())
+        return "{}".format(self.get_absolute_url())
 
     def __repr__(self):
         val = self.__unicode__()
@@ -61,8 +63,8 @@ class Container(PolymorphicModel, ShowFieldContent, Channeling, Publishable):
 
     class Meta:
         ordering = ['-date_available']
-        verbose_name = _(u'Container')
-        verbose_name_plural = _(u'Containers')
+        verbose_name = _('Container')
+        verbose_name_plural = _('Containers')
         unique_together = ("site", "uid")
 
     def save(self, *args, **kwargs):
@@ -87,12 +89,12 @@ class Container(PolymorphicModel, ShowFieldContent, Channeling, Publishable):
 
     def get_absolute_url(self):
         if not self.channel:
-            return u"/{}.html".format(self.get_slug())
-        return u"/{}/{}.html".format(self.channel_long_slug, self.get_slug())
+            return "/{}.html".format(self.get_slug())
+        return "/{}/{}.html".format(self.channel_long_slug, self.get_slug())
 
     def get_http_absolute_url(self):
-        return u"http://{}{}".format(self.site_domain, self.get_absolute_url())
-    get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
+        return "http://{}{}".format(self.site_domain, self.get_absolute_url())
+    get_http_absolute_url.short_description = _('Get HTTP Absolute URL')
 
     @classmethod
     def get_children_models(cls):
