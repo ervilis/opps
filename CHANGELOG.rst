@@ -2,6 +2,12 @@
 Changelog
 =========
 
+0.3.0
+=====
+* Added OPPS_CORE_APPS
+* Opps Core python 3 compatible
+
+
 0.2.6
 =====
 * Improves Django 1.6 integration
