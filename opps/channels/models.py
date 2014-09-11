@@ -55,7 +55,6 @@ class Channel(MPTTModel, Publishable, Slugged):
     paginate_by = models.IntegerField(_("Paginate by"), null=True, blank=True)
     objects = ChannelManager()
 
-
     class Meta:
         verbose_name = _('Channel')
         verbose_name_plural = _('Channels')
