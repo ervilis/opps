@@ -2,6 +2,15 @@
 Changelog
 =========
 
+0.3.0
+=====
+* Django 1.7
+* Added OPPS_CORE_APPS
+* Opps Core with python 3 compatible
+* Removes totally Grappelli Admin
+* Replace django-mppt for django-treebeard
+
+
 0.2.6
 =====
 * Improves Django 1.6 integration
