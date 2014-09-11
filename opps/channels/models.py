@@ -5,18 +5,28 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.conf import settings
 
-from treebeard.mp_tree import MP_Node
+from mptt.models import MPTTModel, TreeForeignKey
+from mptt.managers import TreeManager
 
 from opps.core.models import Publishable
 from opps.core.models import Slugged
 from opps.containers.models import Container
 
 
-class Channel(Publishable, Slugged, MP_Node):
+class ChannelManager(TreeManager):
+    def get_homepage(self, site):
+        try:
+            return super(ChannelManager, self).get_query_set().filter(
+                site__domain=site, homepage=True, published=True).get()
+        except Channel.DoesNotExist:
+            return None
+
+
+class Channel(MPTTModel, Publishable, Slugged):
 
     name = models.CharField(_(u"Name"), max_length=60)
-    long_slug = models.SlugField(_(u"Path name"), max_length=250,
-                                 db_index=True)
+    long_slug = models.CharField(_(u"Long slug"), max_length=250,
+                                 db_index=True, null=True, blank=True)
     layout = models.CharField(_(u'Layout'), max_length=250, db_index=True,
                               default="default")
     description = models.CharField(_(u"Description"),
@@ -36,8 +46,13 @@ class Channel(Publishable, Slugged, MP_Node):
                     u' Should have only one homepage per site')
     )
     group = models.BooleanField(_(u"Group sub-channel?"), default=False)
-    order = models.IntegerField(_(u"Order"), default=0)
+    order = models.PositiveIntegerField(_(u"Order"), default=0)
+    parent = TreeForeignKey('self', related_name='subchannel',
+                            null=True, blank=True,
+                            verbose_name=_(u'Parent'))
     paginate_by = models.IntegerField(_("Paginate by"), null=True, blank=True)
+    objects = ChannelManager()
+
 
     class Meta:
         verbose_name = _(u'Channel')
@@ -51,9 +66,6 @@ class Channel(Publishable, Slugged, MP_Node):
 
     def get_absolute_url(self):
         return u"{}".format(self.__unicode__())
-
-    def get_thumb(self):
-        return None
 
     def get_http_absolute_url(self):
         return u"http://{}{}".format(self.site_domain, self.get_absolute_url())
