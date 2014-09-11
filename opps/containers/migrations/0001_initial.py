@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         ('sites', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('contenttypes', '0001_initial'),
-        ('channels', '__first__'),
+        ('channels', '0001_initial'),
     ]
 
     operations = [

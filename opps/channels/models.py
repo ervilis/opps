@@ -14,7 +14,6 @@ from opps.containers.models import Container
 from opps.core.models import Publishable, Slugged
 
 
-<<<<<<< HEAD
 class ChannelManager(TreeManager):
     def get_homepage(self, site):
         try:
@@ -24,21 +23,13 @@ class ChannelManager(TreeManager):
             return None
 
 
+@python_2_unicode_compatible
 class Channel(MPTTModel, Publishable, Slugged):
 
     name = models.CharField(_(u"Name"), max_length=60)
     long_slug = models.CharField(_(u"Long slug"), max_length=250,
                                  db_index=True, null=True, blank=True)
     layout = models.CharField(_(u'Layout'), max_length=250, db_index=True,
-=======
-@python_2_unicode_compatible
-class Channel(Publishable, Slugged, MP_Node):
-
-    name = models.CharField(_("Name"), max_length=60)
-    long_slug = models.SlugField(_("Long Slug"), max_length=250,
-                                 db_index=True)
-    layout = models.CharField(_('Layout'), max_length=250, db_index=True,
->>>>>>> a4ecc7c1165f8e7dbf0dda2b04fad3a3efdb7e65
                               default="default")
     description = models.CharField(_("Description"),
                                    max_length=255, null=True, blank=True)
@@ -56,16 +47,11 @@ class Channel(Publishable, Slugged, MP_Node):
         help_text=_('Check only if this channel is the homepage.'
                     ' Should have only one homepage per site')
     )
-<<<<<<< HEAD
     group = models.BooleanField(_(u"Group sub-channel?"), default=False)
     order = models.PositiveIntegerField(_(u"Order"), default=0)
     parent = TreeForeignKey('self', related_name='subchannel',
                             null=True, blank=True,
                             verbose_name=_(u'Parent'))
-=======
-    group = models.BooleanField(_("Group sub-channel?"), default=False)
-    order = models.IntegerField(_("Order"), default=0)
->>>>>>> a4ecc7c1165f8e7dbf0dda2b04fad3a3efdb7e65
     paginate_by = models.IntegerField(_("Paginate by"), null=True, blank=True)
     objects = ChannelManager()
 

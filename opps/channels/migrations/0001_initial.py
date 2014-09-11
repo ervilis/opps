@@ -27,12 +27,8 @@ class Migration(migrations.Migration):
                 ('published', models.BooleanField(default=False, db_index=True, verbose_name='Published')),
                 ('slug', models.SlugField(max_length=150, verbose_name='Slug')),
                 ('name', models.CharField(max_length=60, verbose_name='Name')),
-<<<<<<< HEAD
                 ('long_slug', models.CharField(db_index=True, max_length=250, null=True, verbose_name='Long slug', blank=True)),
-=======
-                ('long_slug', models.SlugField(max_length=250, verbose_name='Long Slug')),
->>>>>>> a4ecc7c1165f8e7dbf0dda2b04fad3a3efdb7e65
-                ('layout', models.CharField(default=b'default', max_length=250, verbose_name='Layout', db_index=True)),
+                ('layout', models.CharField(default='default', max_length=250, verbose_name='Layout', db_index=True)),
                 ('description', models.CharField(max_length=255, null=True, verbose_name='Description', blank=True)),
                 ('hat', models.CharField(max_length=255, null=True, verbose_name='Hat', blank=True)),
                 ('show_in_menu', models.BooleanField(default=False, verbose_name='Show in menu?')),
@@ -45,7 +41,7 @@ class Migration(migrations.Migration):
                 ('rght', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('level', models.PositiveIntegerField(editable=False, db_index=True)),
-                ('parent', mptt.fields.TreeForeignKey(related_name=b'subchannel', verbose_name='Parent', blank=True, to='channels.Channel', null=True)),
+                ('parent', mptt.fields.TreeForeignKey(related_name='subchannel', verbose_name='Parent', blank=True, to='channels.Channel', null=True)),
                 ('site', models.ForeignKey(default=1, to='sites.Site')),
                 ('user', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
