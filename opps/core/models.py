@@ -70,6 +70,7 @@ class Channeling(models.Model):
         'channels.Channel',
         verbose_name=_(u"Channel"),
         related_name="channeling_%(app_label)s_%(class)s_sets+",
+        null=True, blank=True
     )
 
     class Meta:
