@@ -84,9 +84,10 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Channeling):
         return self.uid
 
     def get_absolute_url(self):
-        if not self.channel:
+        if not self.channel.exists():
             return "/{}.html".format(self.get_slug())
-        return "/{}/{}.html".format(self.channel_long_slug, self.get_slug())
+        return "/{}/{}.html".format(self.channel.all()[0].long_slug,
+                                    self.get_slug())
 
     def get_http_absolute_url(self):
         return "http://{}{}".format(self.site_domain, self.get_absolute_url())
