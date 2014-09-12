@@ -53,7 +53,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Channeling):
     )
 
     def __str__(self):
-        return "{}".format(self.get_absolute_url())
+        return unicode(self.get_absolute_url())
 
     def __repr__(self):
         val = self.__unicode__()
