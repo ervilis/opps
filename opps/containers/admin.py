@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-
-from .models import Container
-
 from django.contrib import admin
 
+from .models import Container
+from .types.posts import Post
 
+
+@admin.register(Container)
 class ContainerAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Container, ContainerAdmin)
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    pass
