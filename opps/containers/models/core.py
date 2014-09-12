@@ -26,7 +26,7 @@ from opps.core.models import Publishable, Slugged, Channeling
 
 
 @python_2_unicode_compatible
-class Container(PolymorphicModel, ShowFieldContent, Channeling, Publishable):
+class Container(PolymorphicModel, ShowFieldContent, Publishable, Channeling):
     uid = models.CharField(
         _('UID'),
         max_length=60,
@@ -81,12 +81,6 @@ class Container(PolymorphicModel, ShowFieldContent, Channeling, Publishable):
         super(Container, self).save(*args, **kwargs)
 
     def get_slug(self):
-        if self.slug:
-            return self.slug
-        if self.title:
-            return slugify(self.title)
-        if self.name:
-            return slugify(self.name)
         return self.uid
 
     def get_absolute_url(self):
