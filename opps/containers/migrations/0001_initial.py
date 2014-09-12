@@ -43,6 +43,7 @@ class Migration(migrations.Migration):
             name='Post',
             fields=[
                 ('container_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='containers.Container')),
+                ('slug', models.SlugField(max_length=150, verbose_name='Slug')),
                 ('tags', models.CharField(help_text='A comma-separated list of tags.', max_length=4000, null=True, verbose_name='Tags', blank=True)),
                 ('title', models.CharField(max_length=140, verbose_name='Title', db_index=True)),
                 ('hat', models.CharField(max_length=140, null=True, verbose_name='Hat', blank=True)),

@@ -20,6 +20,9 @@ class Article(Container, Slugged, Tagged):
     show_on_root_channel = models.BooleanField(_("Show on root channel?"),
                                                default=True)
 
+    def __str__(self):
+        return unicode(self.get_absolute_url())
+
     def get_slug(self):
         return self.slug
 
