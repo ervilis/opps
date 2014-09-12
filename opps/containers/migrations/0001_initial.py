@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('child_class', models.CharField(db_index=True, max_length=30, null=True, verbose_name='Child class', blank=True)),
                 ('child_module', models.CharField(db_index=True, max_length=120, null=True, verbose_name='Child module', blank=True)),
                 ('child_app_label', models.CharField(db_index=True, max_length=30, null=True, verbose_name='Child app label', blank=True)),
-                ('channel', models.ManyToManyField(related_name=b'channeling_containers_container_sets+', verbose_name='Channel', to='channels.Channel')),
+                ('channel', models.ManyToManyField(related_name=b'channeling_containers_container_sets+', null=True, verbose_name='Channel', to='channels.Channel', blank=True)),
                 ('polymorphic_ctype', models.ForeignKey(related_name=b'polymorphic_containers.container_set', editable=False, to='contenttypes.ContentType', null=True)),
                 ('site', models.ForeignKey(default=1, to='sites.Site')),
                 ('user', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True)),
