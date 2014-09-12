@@ -71,27 +71,9 @@ class Channeling(models.Model):
         verbose_name=_(u"Channel"),
         related_name="channeling_%(app_label)s_%(class)s_sets+",
     )
-    channel_slug = models.CharField(
-        _(u"Channel slug"),
-        max_length=140,
-        null=True, blank=True,
-        db_index=True,
-    )
-    channel_long_slug = models.CharField(
-        _(u"Channel long slug"),
-        max_length=250,
-        null=True, blank=True,
-        db_index=True,
-    )
 
     class Meta:
         abstract = True
-
-    def save(self, *args, **kwargs):
-        if self.channel:
-            self.channel_slug = self.channel.slug
-            self.channel_long_slug = self.channel.long_slug
-        super(Channeling, self).save(*args, **kwargs)
 
 
 class Slugged(models.Model):
