@@ -23,6 +23,7 @@ from polymorphic.showfields import ShowFieldContent
 
 from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling
+from opps.core.managers import PublishableManager
 
 
 @python_2_unicode_compatible
@@ -51,6 +52,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Channeling):
         null=True, blank=True,
         db_index=True
     )
+
+    objects = PublishableManager()
 
     def __str__(self):
         return unicode(self.get_absolute_url())

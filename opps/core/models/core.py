@@ -138,6 +138,7 @@ class Slugged(models.Model):
         if not getattr(self, 'site', False):
             del filters['site']
 
+        import pdb; pdb.set_trace()
         slug_exists = self.__class__.objects.filter(**filters)
 
         if getattr(self, 'pk', None):

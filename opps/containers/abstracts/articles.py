@@ -3,9 +3,9 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
-from opps.containers.models import Container
 from opps.core.tags.models import Tagged
 from opps.core.models import Slugged
+from opps.containers.models import Container
 
 
 @python_2_unicode_compatible

@@ -2,10 +2,10 @@
 
 from django.utils import timezone
 from django.db.models import Manager
+from polymorphic import PolymorphicManager
 
 
-class PublishableManager(Manager):
-
+class PublishableManager(PolymorphicManager):
     def all_published(self):
         return super(PublishableManager, self).get_query_set().filter(
             **self.get_all_published_lookups())

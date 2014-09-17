@@ -8,47 +8,25 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Container'
-        db.create_table(u'containers_container', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('polymorphic_ctype', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'polymorphic_containers.container_set', null=True, to=orm['contenttypes.ContentType'])),
-            ('date_insert', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('date_update', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
-            ('site', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['sites.Site'])),
-            ('site_uid', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True, max_length=4, null=True, blank=True)),
-            ('site_domain', self.gf('django.db.models.fields.CharField')(db_index=True, max_length=100, null=True, blank=True)),
-            ('date_available', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now, null=True, db_index=True)),
-            ('published', self.gf('django.db.models.fields.BooleanField')(default=False, db_index=True)),
-            ('uid', self.gf('django.db.models.fields.CharField')(db_index=True, max_length=60, null=True, blank=True)),
-            ('child_class', self.gf('django.db.models.fields.CharField')(db_index=True, max_length=30, null=True, blank=True)),
-            ('child_module', self.gf('django.db.models.fields.CharField')(db_index=True, max_length=120, null=True, blank=True)),
-            ('child_app_label', self.gf('django.db.models.fields.CharField')(db_index=True, max_length=30, null=True, blank=True)),
+        # Adding model 'Post'
+        db.create_table(u'types_post', (
+            (u'container_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['containers.Container'], unique=True, primary_key=True)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=150)),
+            ('tags', self.gf('django.db.models.fields.CharField')(max_length=4000, null=True, blank=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=140, db_index=True)),
+            ('hat', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
+            ('headline', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('short_title', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
+            ('source', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('show_on_root_channel', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('content', self.gf('django.db.models.fields.TextField')()),
         ))
-        db.send_create_signal(u'containers', ['Container'])
-
-        # Adding unique constraint on 'Container', fields ['site', 'uid']
-        db.create_unique(u'containers_container', ['site_id', 'uid'])
-
-        # Adding M2M table for field channel on 'Container'
-        m2m_table_name = db.shorten_name(u'containers_container_channel')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('container', models.ForeignKey(orm[u'containers.container'], null=False)),
-            ('channel', models.ForeignKey(orm[u'channels.channel'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['container_id', 'channel_id'])
+        db.send_create_signal(u'types', ['Post'])
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'Container', fields ['site', 'uid']
-        db.delete_unique(u'containers_container', ['site_id', 'uid'])
-
-        # Deleting model 'Container'
-        db.delete_table(u'containers_container')
-
-        # Removing M2M table for field channel on 'Container'
-        db.delete_table(db.shorten_name(u'containers_container_channel'))
+        # Deleting model 'Post'
+        db.delete_table(u'types_post')
 
 
     models = {
@@ -140,7 +118,20 @@ class Migration(SchemaMigration):
             'domain': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
+        u'types.post': {
+            'Meta': {'object_name': 'Post'},
+            u'container_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['containers.Container']", 'unique': 'True', 'primary_key': 'True'}),
+            'content': ('django.db.models.fields.TextField', [], {}),
+            'hat': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
+            'headline': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
+            'show_on_root_channel': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
+            'source': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'tags': ('django.db.models.fields.CharField', [], {'max_length': '4000', 'null': 'True', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'db_index': 'True'})
         }
     }
 
-    complete_apps = ['containers']
+    complete_apps = ['types']
