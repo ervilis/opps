@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 import argparse
 from django.conf import settings
-from django.core import management
-from django.core import serializers
+from django.core import management,serializers
+from django.core.management import setup_environ
 
 
 settings.configure()
@@ -23,6 +23,7 @@ if __name__ == "__main__":
         )
 
     elif args.operation == 'exportcontainer':
+        setup_environ(settings)
         from opps.containers.models import ContainerBox
         from opps.boxes.models import QuerySet
         from opps.channels.models import Channel
