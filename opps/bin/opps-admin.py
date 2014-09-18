@@ -3,6 +3,7 @@
 import argparse
 from django.conf import settings
 from django.core import management
+from django.core import serializers
 
 
 settings.configure()
@@ -20,3 +21,14 @@ if __name__ == "__main__":
             'master',
             extensions=('py', 'md', 'dev')
         )
+
+    elif args.operation == 'exportcontainer':
+        from opps.containers.models import ContainerBox
+        from opps.boxes.models import QuerySet
+        from opps.channels.models import Channel
+        models = [ContainerBox, QuerySet, Channel]
+        for m in models:
+            data = serializers.serialize("json", m.objects.all())
+            out = open("opps_{}.json".format(m.__class__.__name__), "w")
+            out.write(data)
+            out.close()
