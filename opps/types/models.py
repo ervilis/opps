@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-
-from opps.containers.abstracts.articles import Article
-
-
-class Post(Article):
-    content = models.TextField(_(u"Content"))
+from opps.containers.types.posts import Post
+from opps.containers.types.albums import Album
+from opps.containers.types.links import Link
