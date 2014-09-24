@@ -31,10 +31,12 @@ OPPS_CORE_APPS = [
     'django.contrib.redirects',
 
     # Dependence
-    'treebeard',
+    'mptt',
+    'south',
 
     # Opps Core
     'opps.core',
     'opps.channels',
     'opps.containers',
+    'opps.types',
 ]
