@@ -23,10 +23,46 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'types', ['Post'])
 
+        # Adding model 'Album'
+        db.create_table(u'types_album', (
+            (u'container_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['containers.Container'], unique=True, primary_key=True)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=150)),
+            ('tags', self.gf('django.db.models.fields.CharField')(max_length=4000, null=True, blank=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=140, db_index=True)),
+            ('hat', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
+            ('headline', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('short_title', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
+            ('source', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('show_on_root_channel', self.gf('django.db.models.fields.BooleanField')(default=True)),
+        ))
+        db.send_create_signal(u'types', ['Album'])
+
+        # Adding model 'Link'
+        db.create_table(u'types_link', (
+            (u'container_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['containers.Container'], unique=True, primary_key=True)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=150)),
+            ('tags', self.gf('django.db.models.fields.CharField')(max_length=4000, null=True, blank=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=140, db_index=True)),
+            ('hat', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
+            ('headline', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('short_title', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
+            ('source', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('show_on_root_channel', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
+            ('container', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='link_containers', null=True, to=orm['containers.Container'])),
+        ))
+        db.send_create_signal(u'types', ['Link'])
+
 
     def backwards(self, orm):
         # Deleting model 'Post'
         db.delete_table(u'types_post')
+
+        # Deleting model 'Album'
+        db.delete_table(u'types_album')
+
+        # Deleting model 'Link'
+        db.delete_table(u'types_link')
 
 
     models = {
@@ -118,6 +154,32 @@ class Migration(SchemaMigration):
             'domain': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
+        u'types.album': {
+            'Meta': {'object_name': 'Album'},
+            u'container_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['containers.Container']", 'unique': 'True', 'primary_key': 'True'}),
+            'hat': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
+            'headline': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
+            'show_on_root_channel': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
+            'source': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'tags': ('django.db.models.fields.CharField', [], {'max_length': '4000', 'null': 'True', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'db_index': 'True'})
+        },
+        u'types.link': {
+            'Meta': {'object_name': 'Link'},
+            'container': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'link_containers'", 'null': 'True', 'to': u"orm['containers.Container']"}),
+            u'container_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['containers.Container']", 'unique': 'True', 'primary_key': 'True'}),
+            'hat': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
+            'headline': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
+            'show_on_root_channel': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
+            'source': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'tags': ('django.db.models.fields.CharField', [], {'max_length': '4000', 'null': 'True', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'db_index': 'True'}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
         },
         u'types.post': {
             'Meta': {'object_name': 'Post'},
