@@ -129,7 +129,7 @@ class Slugged(models.Model):
         filters = {'slug': slug, 'site': site}
 
         if hasattr(self, 'channel'):
-            filters['channel'] = self.channel
+            filters['channel__in'] = [c for c in self.channel.all()]
 
         if hasattr(self, 'parent'):
             filters['parent'] = self.parent
