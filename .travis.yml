@@ -4,6 +4,7 @@ python:
 services:
   - redis-server
 env:
+  - TOX_ENV=py26-django16
   - TOX_ENV=py27-django15
   - TOX_ENV=py27-django16
 install:
