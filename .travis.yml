@@ -8,7 +8,7 @@ env:
   - TOXENV=py34-django17
 install:
   - pip install tox
-script: tox
+script: tox -e $TOXENV
 notifications:
   irc: "irc.freenode.org#opps"
   slack: yacows:Dm0D2qLJnx8e7Ax7JfIcPLry
