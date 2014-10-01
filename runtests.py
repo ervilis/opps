@@ -11,10 +11,8 @@ logging.getLogger('ddf').addHandler(logging.StreamHandler())
 sys.path.insert(0, dirname(abspath(__file__)))
 
 import django
-from django.conf import settings
 
-if not settings.configured:
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 from django_nose import NoseTestSuiteRunner
 
