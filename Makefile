@@ -1,10 +1,6 @@
 .PHONY: test
 test: pep8 clean
-	python runtests.py --with-coverage --cover-package=opps --verbosity=2
-
-.PHONY: tox
-tox:
-	@tox
+	python tests/manage.py test --with-coverage --cover-package=opps --verbosity=2
 
 .PHONY: install
 install:

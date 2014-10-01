@@ -7,9 +7,12 @@ env:
   - TOX_ENV=py26-django16
   - TOX_ENV=py27-django15
   - TOX_ENV=py27-django16
+  - TOX_ENV=py34-django15
+  - TOX_ENV=py34-django16
+  - TOX_ENV=py34-django17
 install:
   - pip install tox
-script: make tox
+script: tox
 notifications:
   irc: "irc.freenode.org#opps"
   slack: yacows:Dm0D2qLJnx8e7Ax7JfIcPLry
