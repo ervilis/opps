@@ -1,9 +1,9 @@
 .PHONY: test
 test: pep8 clean
-	python runtests.py
+	python runtests.py --with-coverage --cover-package=opps --verbosity=2
 
-.PHONY: tox-toxtest
-tox-test: environment
+.PHONY: tox
+tox:
 	@tox
 
 .PHONY: install
@@ -15,7 +15,7 @@ pep8:
 	@flake8 opps --ignore=F403,F401 --exclude=migrations
 
 .PHONY: sdist
-sdist: test
+sdist: tox
 	@python setup.py sdist upload
 
 .PHONY: clean

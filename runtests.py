@@ -1,30 +1,43 @@
 #!/usr/bin/env python
+import logging
 import os
 import sys
+from os.path import dirname, abspath
+from optparse import OptionParser
+from distutils.version import StrictVersion
 
+logging.getLogger('ddf').addHandler(logging.StreamHandler())
+
+sys.path.insert(0, dirname(abspath(__file__)))
+
+import django
 from django.conf import settings
-from django.core.management import execute_from_command_line
-
 
 if not settings.configured:
-    settings.configure(
-        DATABASES={
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-            }
-        },
-        INSTALLED_APPS=[
-            'tests',
-        ],
-        MIDDLEWARE_CLASSES=[],
-    )
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
+
+from django_nose import NoseTestSuiteRunner
 
 
-def runtests():
-    argv = sys.argv[:1] + ['test'] + sys.argv[1:]
-    execute_from_command_line(argv)
+def runtests(*test_args, **kwargs):
+    if StrictVersion(django.get_version()) >= StrictVersion('1.7'):
+        django.setup()
+
+    kwargs.setdefault('interactive', False)
+    test_runner = NoseTestSuiteRunner(**kwargs)
+    failures = test_runner.run_tests(test_args)
+    sys.exit(failures)
 
 
 if __name__ == '__main__':
-    runtests()
+    try:
+        os.remove('test_:memory:')
+    except:
+        pass
+    parser = OptionParser()
+    parser.add_option('--verbosity', dest='verbosity', action='store',
+                      default=2, type=int)
+    parser.add_options(NoseTestSuiteRunner.options)
+    (options, args) = parser.parse_args()
 
+    runtests(*args, **options.__dict__)

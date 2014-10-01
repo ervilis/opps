@@ -4,3 +4,7 @@ tox
 django-nose
 mkdocs
 ghp-import
+model_mommy
+coverage==3.7.1
+django-coverage
+coveralls
