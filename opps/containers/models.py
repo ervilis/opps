@@ -56,15 +56,10 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Channeling):
     objects = PublishableManager()
 
     def __str__(self):
-        return unicode(self.get_absolute_url())
+        return self.get_absolute_url()
 
     def __repr__(self):
-        val = self.__unicode__()
-        if isinstance(val, str):
-            return val
-        elif not isinstance(val, unicode):
-            val = unicode(val)
-        return val.encode('utf8')
+        return self.__str__()
 
     class Meta:
         ordering = ['-date_available']

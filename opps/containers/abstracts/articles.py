@@ -21,7 +21,7 @@ class Article(Container, Slugged, Tagged):
                                                default=True)
 
     def __str__(self):
-        return unicode(self.get_absolute_url())
+        return self.get_absolute_url()
 
     def get_slug(self):
         return self.slug
