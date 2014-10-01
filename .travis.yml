@@ -4,12 +4,11 @@ python:
 services:
   - redis-server
 env:
-  - DJANGO=django==1.6
-  - DJANGO=django==1.7
+  - TOX_ENV=py27-django15
+  - TOX_ENV=py27-django16
 install:
-  - pip install $DJANGO
-  - make install
-script: make test
+  - pip install tox
+script: make tox
 notifications:
   irc: "irc.freenode.org#opps"
   slack: yacows:Dm0D2qLJnx8e7Ax7JfIcPLry
