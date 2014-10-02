@@ -53,6 +53,30 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'types', ['Link'])
 
+        # Adding model 'Image'
+        db.create_table(u'types_image', (
+            (u'container_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['containers.Container'], unique=True, primary_key=True)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=150)),
+            ('tags', self.gf('django.db.models.fields.CharField')(max_length=4000, null=True, blank=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=140, db_index=True)),
+            ('archive', self.gf('django.db.models.fields.files.FileField')(max_length=255, null=True, blank=True)),
+            ('archive_link', self.gf('django.db.models.fields.URLField')(max_length=255, null=True, blank=True)),
+            ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('source', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('crop_example', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('crop_x1', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0, null=True, blank=True)),
+            ('crop_x2', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0, null=True, blank=True)),
+            ('crop_y1', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0, null=True, blank=True)),
+            ('crop_y2', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0, null=True, blank=True)),
+            ('flip', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('flop', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('halign', self.gf('django.db.models.fields.CharField')(default=False, max_length=6, null=True, blank=True)),
+            ('valign', self.gf('django.db.models.fields.CharField')(default=False, max_length=6, null=True, blank=True)),
+            ('fit_in', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('smart', self.gf('django.db.models.fields.BooleanField')(default=False)),
+        ))
+        db.send_create_signal(u'types', ['Image'])
+
 
     def backwards(self, orm):
         # Deleting model 'Post'
@@ -63,6 +87,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Link'
         db.delete_table(u'types_link')
+
+        # Deleting model 'Image'
+        db.delete_table(u'types_image')
 
 
     models = {
@@ -166,6 +193,28 @@ class Migration(SchemaMigration):
             'source': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'tags': ('django.db.models.fields.CharField', [], {'max_length': '4000', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'db_index': 'True'})
+        },
+        u'types.image': {
+            'Meta': {'object_name': 'Image'},
+            'archive': ('django.db.models.fields.files.FileField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'archive_link': ('django.db.models.fields.URLField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            u'container_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['containers.Container']", 'unique': 'True', 'primary_key': 'True'}),
+            'crop_example': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'crop_x1': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
+            'crop_x2': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
+            'crop_y1': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
+            'crop_y2': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'fit_in': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'flip': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'flop': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'halign': ('django.db.models.fields.CharField', [], {'default': 'False', 'max_length': '6', 'null': 'True', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
+            'smart': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'source': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'tags': ('django.db.models.fields.CharField', [], {'max_length': '4000', 'null': 'True', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'db_index': 'True'}),
+            'valign': ('django.db.models.fields.CharField', [], {'default': 'False', 'max_length': '6', 'null': 'True', 'blank': 'True'})
         },
         u'types.link': {
             'Meta': {'object_name': 'Link'},
