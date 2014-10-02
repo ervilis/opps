@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.conf import settings
 from libthumbor import CryptoURL
+from opps.containers.conf import settings
 
 
 crypto = CryptoURL(key=settings.THUMBOR_SECURITY_KEY)
