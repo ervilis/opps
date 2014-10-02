@@ -6,7 +6,7 @@ from model_mommy import mommy
 from ..models import Link
 
 
-class ImageTest(TestCase):
+class LinkTest(TestCase):
     def setUp(self):
         self.link = mommy.make(Link)
 
