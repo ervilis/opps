@@ -18,7 +18,6 @@ class Migration(SchemaMigration):
             ('headline', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('short_title', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
             ('source', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('show_on_root_channel', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('content', self.gf('django.db.models.fields.TextField')()),
         ))
         db.send_create_signal(u'types', ['Post'])
@@ -33,7 +32,6 @@ class Migration(SchemaMigration):
             ('headline', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('short_title', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
             ('source', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('show_on_root_channel', self.gf('django.db.models.fields.BooleanField')(default=True)),
         ))
         db.send_create_signal(u'types', ['Album'])
 
@@ -47,7 +45,6 @@ class Migration(SchemaMigration):
             ('headline', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('short_title', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
             ('source', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('show_on_root_channel', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
             ('container', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='link_containers', null=True, to=orm['containers.Container'])),
         ))
@@ -163,6 +160,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'polymorphic_ctype': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'polymorphic_containers.container_set'", 'null': 'True', 'to': u"orm['contenttypes.ContentType']"}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
+            'show_on_root_channel': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sites.Site']"}),
             'site_domain': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'site_uid': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True', 'max_length': '4', 'null': 'True', 'blank': 'True'}),
@@ -188,7 +186,6 @@ class Migration(SchemaMigration):
             'hat': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
             'headline': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
-            'show_on_root_channel': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
             'source': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'tags': ('django.db.models.fields.CharField', [], {'max_length': '4000', 'null': 'True', 'blank': 'True'}),
@@ -223,7 +220,6 @@ class Migration(SchemaMigration):
             'hat': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
             'headline': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
-            'show_on_root_channel': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
             'source': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'tags': ('django.db.models.fields.CharField', [], {'max_length': '4000', 'null': 'True', 'blank': 'True'}),
@@ -237,7 +233,6 @@ class Migration(SchemaMigration):
             'hat': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
             'headline': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
-            'show_on_root_channel': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
             'source': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'tags': ('django.db.models.fields.CharField', [], {'max_length': '4000', 'null': 'True', 'blank': 'True'}),
