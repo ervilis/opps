@@ -72,6 +72,10 @@ class Channeling(models.Model):
         related_name="channeling_%(app_label)s_%(class)s_sets+",
         null=True, blank=True
     )
+    show_on_root_channel = models.BooleanField(
+        _(u"Show on root channel?"),
+        default=True
+    )
 
     class Meta:
         abstract = True
