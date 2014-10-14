@@ -251,8 +251,7 @@ def apply_rules(admin_class, app):
             if hasattr(form, 'base_fields'):
                 for field, attrs in field_overrides.iteritems():
                     for attr, value in attrs.iteritems():
-                        if isinstance(value, (str, unicode)):
-                            value = _(value)
+                        value = _(value)
                         try:
                             setattr(form.base_fields[field], attr, value)
                         except:
