@@ -6,10 +6,10 @@ import hmac
 import json
 
 from hashlib import sha1
+from datetime import datetime
 
 from django.db import models
-from django.db.models import Q
-from django.db.models import Manager
+from django.db.models import Q, Manager
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.core.cache import cache
@@ -70,7 +70,6 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Channeling):
         self.child_class = self.__class__.__name__
         self.child_module = self.__class__.__module__
         self.child_app_label = self._meta.app_label
-        import pdb; pdb.set_trace()
 
         if not self.id:
             new_uuid = uuid.uuid4()
@@ -193,7 +192,6 @@ class QuerySet(Publishable, Channeling, Slugged):
 
         exclude_ids = exclude_ids or []
 
-        import pdb; pdb.set_trace()
         _app, _model = self.model.split('.')
         model = models.get_model(_app, _model)
 
