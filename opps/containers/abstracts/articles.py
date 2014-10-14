@@ -17,8 +17,6 @@ class Article(Container, Slugged, Tagged):
                                    null=True, blank=True)
     source = models.CharField(_('Source'), null=True, blank=True,
                               max_length=255)
-    show_on_root_channel = models.BooleanField(_("Show on root channel?"),
-                                               default=True)
 
     def __str__(self):
         return self.get_absolute_url()
