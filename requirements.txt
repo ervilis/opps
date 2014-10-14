@@ -4,5 +4,5 @@ django-polymorphic==0.5.6
 django-mptt>=0.6.1
 django-haystack==2.3.1
 South==1.0
-libthumbor==1.0.1
+libthumbor
 django-appconf==0.6
