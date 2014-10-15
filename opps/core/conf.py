@@ -8,3 +8,11 @@ class HaystackConf(AppConf):
 
     class Meta:
         prefix = 'haystack'
+
+
+class OppsConf(AppConf):
+
+    CONTAINER_TYPES = ()
+
+    class Meta:
+        prefix = 'opps'
