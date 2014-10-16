@@ -107,7 +107,6 @@ class ListView(View, DjangoListView):
         if self.fallback and self.site != self.site_master:
             filters.get('site_domain__in', []).append(self.site_master.domain)
 
-        import pdb; pdb.set_trace()
         queryset = queryset.filter(**filters)
         if self.excluded_ids:
             queryset = queryset.exclude(
