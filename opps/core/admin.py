@@ -11,7 +11,7 @@ from haystack.query import SearchQuerySet
 from django.contrib.admin.views.main import ChangeList
 
 from .filters import ChildClassListFilter, ChannelListFilter
-from .conf import settings
+from opps.conf import settings
 
 USE_HAYSTACK = getattr(settings, 'OPPS_ADMIN_USE_HAYSTACK', False)
 
