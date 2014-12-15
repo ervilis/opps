@@ -12,8 +12,8 @@ class PublishableQuerySet(models.query.QuerySet):
 
     def get_all_published_lookups(self, prefix=""):
         return {
-            '%sdate_available__lte' % prefix: timezone.now(),
-            '%spublished' % prefix: True,
+            '{}date_available__lte'.format(prefix): timezone.now(),
+            '{}published'.format(prefix): True,
         }
 
 
