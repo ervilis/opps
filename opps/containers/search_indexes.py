@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from django.utils import timezone
+
 from haystack.indexes import \
     CharField, DateTimeField, MultiValueField, SearchIndex, IntegerField
 
@@ -24,4 +26,6 @@ class ContainerIndex(SearchIndex):
         return 'date_update'
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.all_published()
+        return self.get_model().objects.all_published().filter(
+            channel__date_available__lte=timezone.now(),
+            channel__published=True)
