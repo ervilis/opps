@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import urllib
 from libthumbor import CryptoURL
 from django.conf import settings
 
@@ -11,10 +12,6 @@ def _remove_prefix(url, prefix):
     if url.startswith(prefix):
         return url[len(prefix):]
     return url
-
-
-def _remove_schema(url):
-    return _remove_prefix(url, 'http://')
 
 
 def _prepend_media_url(url):
@@ -30,7 +27,7 @@ def image_url(image_url, **kwargs):
         return image_url
 
     image_url = _prepend_media_url(image_url)
-    image_url = _remove_schema(image_url)
+    image_url = urllib.quote_plus(image_url)
 
     try:
         encrypted_url = crypto.generate(
